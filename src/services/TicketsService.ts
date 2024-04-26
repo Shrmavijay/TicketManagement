@@ -6,6 +6,7 @@ import { Priority, status } from "@prisma/client";
 export const createTicket = async (ticket: tickets): Promise<tickets> => {
   try {
     const {user_id, title, description,priority,status, due_date} = ticket;
+    console.log("Tikcet: ",ticket)
     const savedTicket = await prisma.tickets.create({
       data: {
         user_id:user_id,
