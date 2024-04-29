@@ -24,7 +24,7 @@ export const createUser = globalRequestHandler(
   }
 );
 
-export const userloginControoler = globalRequestHandler(
+export const userloginController = globalRequestHandler(
   async (req: Request, res: Response): Promise<any> => {
     const userdata: User = req.body;
     const save = await userService.loginUser(userdata);

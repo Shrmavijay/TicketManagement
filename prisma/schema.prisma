@@ -25,10 +25,11 @@ model users {
 
 model tickets {
   id            Int      @id @default(autoincrement())
-  user          users    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user          users    @relation(fields: [user_id], references: [id], onDelete: Cascade) 
   user_id       Int
   title         String
   description   String
+  assigned_to    String[]
   priority      Priority
   status        status
   due_date      DateTime @db.Timestamptz()
@@ -41,9 +42,15 @@ enum Priority {
   HIGH
 }
 
+// enum status {
+//   NEW
+//   IN_PROGRESS
+//   COMPLETED
+//   REJECTED
+// }
 enum status {
-  NEW
-  IN_PROGRESS
-  COMPLETED
-  REJECTED
+  TODO
+  PROGRESS
+  DONE
+  CANCELLED
 }

@@ -4,6 +4,7 @@ const globalRequestHandler = (operation: (req: Request, res: Response, next: Nex
   return async (req: Request,res: Response,next: NextFunction): Promise<void> => {
     try {
       await operation(req, res, next);
+      next()
     } catch (err) {
       next(err)
     }
