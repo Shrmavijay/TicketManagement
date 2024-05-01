@@ -101,3 +101,41 @@ export const getuserLogout =async(id:number):Promise<any>=>{
 
   }
 }
+
+
+export const updatePasswordService = async (id: number, oldPassword: any, newPassword: any): Promise<any> => {
+  
+  try {
+    const getUserDetails = await prisma.users.findFirst({
+      where: {
+        id: id,
+      },
+    });
+
+    if (getUserDetails) {
+      const isOldPasswordValid = await bcrypt.compare(oldPassword, getUserDetails.password);
+      console.log("valid: ",isOldPasswordValid)
+      if (isOldPasswordValid) {
+        const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+
+        const updatedUser = await prisma.users.update({
+          where: {
+            id: id,
+          },
+          data: {
+            password: hashedNewPassword,
+          },
+        });
+
+        return updatedUser;
+      } else {
+        throw new Error("Old password is incorrect");
+      }
+    } else {
+      throw new Error("User not found");
+    }
+  } catch (error) {
+    console.log(error.message)
+    throw new Error("Internal Server Error");
+  }
+};

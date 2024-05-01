@@ -16,17 +16,7 @@ export const getalltickets = globalRequestHandler(
       });
     }
   );
-  // export const getallUser = globalRequestHandler(
-  //   async (req: Request, res: Response): Promise<void> => {
-  //     const allusers = await ticketService.getallUser();
-  //     console.log(allusers,"viju")
-  //     res.status(StatusCodes.OK).json({
-  //       message: "all users found successfully",
-  //       data: allusers,
-  //     });
-  //   }
-  // );
-
+ 
   export const createtickets = globalRequestHandler(
     async (req: Request, res: Response): Promise<void> => {
       const newtickets:tickets = req.body;

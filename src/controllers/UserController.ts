@@ -70,3 +70,22 @@ export const getUserController = globalRequestHandler(async(req:Request,res:Resp
         message: "User Not Found !",
       });
     }})
+
+
+    export const userUpdatePassword = globalRequestHandler(async(req:Request,res:Response):Promise<void>=>{
+      const getUserid = parseInt(req.params.id)
+    
+      const {oldPassword,newPassword} =req.body
+
+      const passupdate = await userService.updatePasswordService(getUserid,oldPassword,newPassword)
+      if (passupdate) {
+        res.status(StatusCodes.OK).json({
+          message: " password update successfully",
+        });
+      }else{
+        res.status(StatusCodes.NOT_FOUND).json({
+          message: "Invalid credentials !",
+        });
+      }
+    
+    })

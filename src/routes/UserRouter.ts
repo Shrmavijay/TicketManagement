@@ -9,7 +9,6 @@ UserRouter.post('/', userController.createUser)
 UserRouter.post('/login', userController.userloginController)
 UserRouter.get('/:id', authenticateJWT, userController.getUserController,)
 UserRouter.delete('/:id', authenticateJWT, userController.userLogout,)
-
-
+UserRouter.put('/:id', authenticateJWT, userController.userUpdatePassword,)
 
 export default UserRouter
